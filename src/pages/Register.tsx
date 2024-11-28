@@ -1,7 +1,7 @@
 function Register() {
   return (
     <div>
-      <h1>welcome to egov page</h1>
+      <h1>Egov сайтына қош келдіңіз!</h1>
       <p>Порталға кіру</p>
       <span>ЭЦҚ</span>
       <div>
