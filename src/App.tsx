@@ -1,29 +1,31 @@
-import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import Login from "./pages/Login";
 import Register from "./pages/Register";
-import "./App.css";
-import egov from "./assets/egov.svg";
+import Home from "./pages/Home";
+import { useState } from "react";
+import ProtectedRoute from "./components/ProtectedRoute";
+import ProtectedPage from "./pages/ProtectedPage";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={egov} className="logo" alt="Vite logo" />
-        </a>
-      </div>
-      <div>
-        <Register />
-        <br />
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p className="read-the-docs">
-          Click on the Vite and React logos to learn more
-        </p>
-      </div>
-    </>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/register" element={<Register />} />
+      <Route
+        path="/protected"
+        element={
+          <ProtectedRoute isAuthenticated={isAuthenticated}>
+            <ProtectedPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/login"
+        element={<Login setIsAuthenticated={setIsAuthenticated} />}
+      />
+    </Routes>
   );
 }
 
